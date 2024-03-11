@@ -46,6 +46,14 @@ class Container:
         raise NotImplementedError
 
 
+def is_higher_priority(item1: Any, item2: Any) -> bool:
+    """Check if item1 has higher priority than item2."""
+    try:
+        return item1 < item2
+    except TypeError:
+        return id(item1) > id(item2)
+
+
 class PriorityQueue(Container):
     """A queue of items that operates in priority order.
 
@@ -121,20 +129,10 @@ class PriorityQueue(Container):
         index = 0
 
         while (index < len(self._items)
-               and not self.is_higher_priority(item, self._items[index])):
+               and not is_higher_priority(item, self._items[index])):
             index += 1
 
         self._items.insert(index, item)
-
-    def is_higher_priority(self, item1: Any, item2: Any) -> bool:
-        """Check if item1 has higher priority than item2."""
-        try:
-            return item1 < item2
-        except TypeError:
-            return id(item1) > id(item2)
-
-    # TODO: What's the point of featuring self if instance variables are never
-    #  accessed?
 
 
 if __name__ == '__main__':
