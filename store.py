@@ -291,6 +291,8 @@ class CheckoutLine:
         else:
             return True
 
+        # TODO: Maybe check for is_open?
+
     def accept(self, customer: Customer) -> bool:
         """Accept <customer> into the end of this CheckoutLine if possible.
 
