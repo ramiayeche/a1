@@ -139,6 +139,28 @@ class CustomerArrival(Event):
         # find the smallest line or smallest with lowest index
         # if line is found, add timestamp to customer arrival and enter line
         # if no line is available, raise NoAvailableLineError
+        smallest_line_index = None
+        smallest_line_size = float('inf')
+
+        for i in range(len(store.checkout_lines)):
+            line = store.checkout_lines[i]
+            if (line.can_accept(self.customer) and line.is_open
+                    and len(line) < smallest_line_size):
+                smallest_line_size = len(line)
+                smallest_line_index = i
+
+        if smallest_line_index is not None:
+            smallest_line = store.checkout_lines[smallest_line_index]
+            smallest_line.accept(self.customer)
+            if smallest_line.first_in_line() == self.customer:
+                return [CheckoutStarted(self.timestamp, smallest_line_index)]
+
+        if smallest_line_index is None:
+            CustomerArrival(self.timestamp + 1, self.customer).do(store)
+            raise NoAvailableLineError
+        # Not sure if correct, especially process of creating new event
+
+        return []
 
 
 class CheckoutStarted(Event):
@@ -164,6 +186,7 @@ class CheckoutStarted(Event):
     def do(self, store: GroceryStore) -> list[Event]:
         """A customer has reached the front of a particular line, and the
         checkout process begins for all of their items."""
+
 
 
 class CheckoutCompleted(Event):
