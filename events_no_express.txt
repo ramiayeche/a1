@@ -1,0 +1,12 @@
+5 Arrive James A 1 B 2 A 1 B 2 A 1 B 2 A 1 B 2 A 1 B 2 A 1 B 2 A 1 B 2
+5 Arrive Allan A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Jack A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Janice A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Tara A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 10 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Simone A 1 A 1 A 1 A 1 A 1 A 9 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Elena A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+5 Arrive Kevin A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+10 Arrive Wilson A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1 A 1
+20 Arrive John B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2
+20 Arrive Jessica B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2
+20 Arrive Andy B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2 B 2 A 1 B 2 A 1 B 2
