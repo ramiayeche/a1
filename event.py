@@ -189,9 +189,12 @@ class CheckoutStarted(Event):
         checkout_time = store.checkout_lines[self.line_number].\
             next_checkout_time()
         completion_timestamp = self.timestamp + checkout_time
-        return [CheckoutCompleted(completion_timestamp, self.line_number)]
+        customer = store.first_in_line()
+        return [CheckoutCompleted(completion_timestamp, self.line_number,
+                                  customer)]
 
         # TODO: Check if this works
+
 
 class CheckoutCompleted(Event):
     """A customer finishes the checkout process.
@@ -248,7 +251,7 @@ class CloseLine(Event):
             smallest_line_size = float('inf')
             for i in range(len(store.checkout_lines)):
                 line = store.checkout_lines[i]
-                if line.can_accept(customer)and len(line) < smallest_line_size:
+                if line.can_accept(customer) and len(line) < smallest_line_size:
                     smallest_line_size = len(line)
                     new_line_index = i
             if new_line_index >= 0:
