@@ -158,7 +158,7 @@ class CustomerArrival(Event):
         if smallest_line_index is None:
             CustomerArrival(self.timestamp + 1, self.customer).do(store)
             raise NoAvailableLineError
-        # Not sure if correct, especially process of creating new event
+        # TODO: Not sure if correct, especially process of creating new event
 
         return []
 
@@ -186,8 +186,12 @@ class CheckoutStarted(Event):
     def do(self, store: GroceryStore) -> list[Event]:
         """A customer has reached the front of a particular line, and the
         checkout process begins for all of their items."""
+        checkout_time = store.checkout_lines[self.line_number].\
+            next_checkout_time()
+        completion_timestamp = self.timestamp + checkout_time
+        return [CheckoutCompleted(completion_timestamp, self.line_number)]
 
-
+        # TODO: Check if this works
 
 class CheckoutCompleted(Event):
     """A customer finishes the checkout process.
@@ -211,6 +215,12 @@ class CheckoutCompleted(Event):
     def do(self, store: GroceryStore) -> list[Event]:
         """A customer finishes the checkout process and leaves the checkout line
         they are in."""
+        store.checkout_lines[self.line_number].remove_front_customer()
+        if store.checkout_lines[self.line_number].first_in_line() is not None:
+            return [CheckoutStarted(self.timestamp, self.line_number)]
+        return []
+
+        # TODO: Check if this works too
 
 
 class CloseLine(Event):
@@ -231,6 +241,25 @@ class CloseLine(Event):
     def do(self, store: GroceryStore) -> list[Event]:
         """All customers in the specified line must join a new line except
         the first customer in line."""
+        removed_customers = store.close_line(self.line_number)
+        events = []
+        for customer in removed_customers:
+            new_line_index = -1
+            smallest_line_size = float('inf')
+            for i in range(len(store.checkout_lines)):
+                line = store.checkout_lines[i]
+                if line.can_accept(customer)and len(line) < smallest_line_size:
+                    smallest_line_size = len(line)
+                    new_line_index = i
+            if new_line_index >= 0:
+                new_line = store.checkout_lines[new_line_index]
+                new_line.accept(customer)
+                if new_line.first_in_line() == customer:
+                    events.append(CheckoutStarted(self.timestamp,
+                                                  new_line_index))
+        return events
+
+        # TODO: Check if this is correct
 
 
 EVENT_SAMPLE = StringIO("""121 Arrive William Bananas 7
