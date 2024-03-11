@@ -136,11 +136,9 @@ class CustomerArrival(Event):
         customers or the lowest index if it's a tie. Otherwise, the customer
         arrives at a later timestamp.
         """
-        # find the smallest line or smallest with lowest index
-        # if line is found, add timestamp to customer arrival and enter line
-        # if no line is available, raise NoAvailableLineError
         smallest_line_index = None
         smallest_line_size = float('inf')
+        self.customer.arrival_time = self.timestamp
 
         for i in range(len(store.checkout_lines)):
             line = store.checkout_lines[i]
@@ -155,13 +153,7 @@ class CustomerArrival(Event):
             if smallest_line.first_in_line() == self.customer:
                 return [CheckoutStarted(self.timestamp, smallest_line_index)]
 
-        # TODO: Thoroughly check this if statement below this comment
-        if smallest_line_index is None:
-            CustomerArrival(self.timestamp + 1, self.customer).do(store)
-            raise NoAvailableLineError
-        # TODO: Not sure if correct, especially process of creating new event
-
-        return []
+        return [CustomerArrival(self.timestamp + 1, self.customer)]
 
 
 class CheckoutStarted(Event):
@@ -187,14 +179,11 @@ class CheckoutStarted(Event):
     def do(self, store: GroceryStore) -> list[Event]:
         """A customer has reached the front of a particular line, and the
         checkout process begins for all of their items."""
-        checkout_time = store.checkout_lines[self.line_number].\
-            next_checkout_time()
+        checkout_time = store.next_checkout_time(self.line_number)
         completion_timestamp = self.timestamp + checkout_time
-        customer = store.first_in_line()
-        return [CheckoutCompleted(completion_timestamp, self.line_number,
-                                  customer)]
-
-        # TODO: Check if this works
+        customer = store.first_in_line(self.line_number)
+        return [CheckoutCompleted(completion_timestamp,
+                                  self.line_number, customer)]
 
 
 class CheckoutCompleted(Event):
@@ -223,8 +212,6 @@ class CheckoutCompleted(Event):
         if store.checkout_lines[self.line_number].first_in_line() is not None:
             return [CheckoutStarted(self.timestamp, self.line_number)]
         return []
-
-        # TODO: Check if this works too
 
 
 class CloseLine(Event):
@@ -262,8 +249,6 @@ class CloseLine(Event):
                     events.append(CheckoutStarted(self.timestamp,
                                                   new_line_index))
         return events
-
-        # TODO: Check if this is correct
 
 
 EVENT_SAMPLE = StringIO("""121 Arrive William Bananas 7

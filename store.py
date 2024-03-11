@@ -61,6 +61,8 @@ class GroceryStore:
         - config_file is open
         - All values in config_file are >= 0
         """
+        self.checkout_lines = []
+
         data = json.load(config_file)
         self.num_lines = (data['regular_count'] + data['express_count']
                           + data['self_serve_count'])
@@ -286,12 +288,7 @@ class CheckoutLine:
         >>> line.can_accept(Customer('Sophia', []))
         True
         """
-        if len(self._queue) == self.capacity:
-            return False
-        else:
-            return True
-
-        # TODO: Maybe check for is_open?
+        return len(self._queue) < self.capacity and self.is_open
 
     def accept(self, customer: Customer) -> bool:
         """Accept <customer> into the end of this CheckoutLine if possible.
@@ -382,6 +379,10 @@ class CheckoutLine:
             return self._queue[0]
         else:
             return None
+
+    @property
+    def queue(self):
+        return self._queue
 
 
 class RegularLine(CheckoutLine):
