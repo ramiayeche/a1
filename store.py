@@ -322,7 +322,10 @@ class CheckoutLine:
 
         No doctests provided, since this method is abstract.
         """
-        return self._queue[0].item_time()
+        if len(self._queue) != 0:
+            return self._queue[0].item_time()
+        else:
+            return 0
 
     def remove_front_customer(self) -> int:
         """If there is any customer (or customers) in this checkout line,
