@@ -1,0 +1,18 @@
+0 Arrive James Chips 2
+5 Arrive Allan Bread 3 Bread 3 Bread 3 Radish 6
+20 Arrive Jack Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1
+10 Arrive Janice Bread 3 Bananas 7 Chips 2 Radish 6
+121 Arrive William Bananas 7
+22 Arrive Trevor Flowers 22 Bread 3 Cheese 3 Cheese 3
+41 Close 0
+55 Arrive Amy Gum 1 Milk 4 Bread 3
+124 Arrive Neda Milk 4 Fish 15
+19 Arrive Tara Meat 12 Milk 4 Milk 4 Lettuce 10
+40 Arrive Simone Radish 6 Meat 12 Cheese 3
+65 Arrive Elena Chips 2 Chips 2 Chips 2 Chips 2 Chips 2 Chips 2 Chips 2 Chips 2
+115 Arrive Kevin Chips 2 Cheese 3
+2 Arrive Wilson Meat 12 Milk 4 Flowers 22 Lettuce 10
+6 Arrive John Pop 20 Fish 15 Lettuce 10
+70 Arrive Jessica Lettuce 10 Bread 3 Gum 1
+93 Arrive Andy Chips 2 Bananas 7 Bananas 7
+26 Close 1

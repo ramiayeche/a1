@@ -1,0 +1,7 @@
+0 Arrive James Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1
+10 Arrive Jack Gum 1
+20 Arrive Janice Gum 1 Gum 1 Gum 1 Gum 1
+20 Arrive Tara Gum 1 Gum 1
+40 Arrive Simone Gum 1 Gum 1 Gum 1
+50 Close 0
+65 Arrive Alan Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1 Gum 1
