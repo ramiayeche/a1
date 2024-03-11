@@ -416,11 +416,8 @@ class ExpressLine(CheckoutLine):
         """Check if there is enough room in this ExpressLine and if customer
         has less than 8 items in their cart
         """
-        if (len(self._queue) == self.capacity
-                and customer.num_items() <= EXPRESS_LIMIT):
-            return True
-        else:
-            return False
+        return (len(self._queue) < self.capacity and self.is_open
+                and customer.num_items() <= EXPRESS_LIMIT)
 
 
 class SelfServeLine(CheckoutLine):
