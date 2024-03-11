@@ -155,6 +155,7 @@ class CustomerArrival(Event):
             if smallest_line.first_in_line() == self.customer:
                 return [CheckoutStarted(self.timestamp, smallest_line_index)]
 
+        # TODO: Thoroughly check this if statement below this comment
         if smallest_line_index is None:
             CustomerArrival(self.timestamp + 1, self.customer).do(store)
             raise NoAvailableLineError

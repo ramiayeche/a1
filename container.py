@@ -133,6 +133,9 @@ class PriorityQueue(Container):
         except TypeError:
             return id(item1) > id(item2)
 
+    # TODO: What's the point of featuring self if instance variables are never
+    #  accessed?
+
 
 if __name__ == '__main__':
     import doctest
